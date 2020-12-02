@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+/* Box-sizing: border-box tells browser to account for any border and padding. If I set an elements width to 100px, that 100px will include any border and padding I add */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Muli', sans-serif;
+  display: flex;
+  /* Align items is used to align property in the cross-axis, or VERTICALLY */
+  align-items: center;
+  /* Justify-content is used to align property in the main-axis, or HORIZONTALLY */
+  justify-content: center;
+  /* vh stands for Viewport Height, which is based on the height of the viewport i.e. 1vh is equal to 1% of the viewport height */
+  height: 100vh;
+  /* overflow is specifying whether to clip the content or add it to the scrollbars when an element is too big to fit in the specified area... HIDDEN === CLIPPED && REST OF CONTENT WILL BE INVISIBLE */
+  overflow: hidden;
+  margin: 0;
+}
+
+.container {
+  /* display: flex is automatically a ROW display */
+  display: flex;
+  /* vw means viewport width, so 90vw is the same as 90% of the viewport */
+  width: 90vw;
+}
+
+.panel {
+  /* background-size: cover resizes background image to COVER the entire container */
+  background-size: cover;
+  /* backgorund-position sets the starting position of a background image */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  /* flex property sets the width of the element. 0.5 will be the initial value (later will be changed depending on which card is active) */
+  flex: 0.5;
+  margin: 10px;
+  position: relative;
+  transition: flex 0.7s ease-in;
+}
+
+.panel h3 {
+  font-size: 24px;
+  /* position: absolute will keep the element in the exact same position always, even when scrolling */
+  position: absolute;
+  /* bottom and left are adjusting the positioning of the text within the cards, mosing in 20px away from the bottom and 20px away from the left margin */
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  /* opacity: 0, sets the text to be invisible and it will only be visible when one card is set to active */
+  opacity: 0;
+}
+
+.panel.active {
+  /* .panel.active is calling the first two classes in the container tag. And flex: 5; is adjusting that initial starting width of 0.5 to 5 for when one of the cards is active */
+  flex: 5;
+}
+
+.panel.active h3 {
+  /* .panel.active h3 is calling the h3 element within the first div tag in the container tag. Setting the opacity to 1 makes the text in the ACTIVE card visible */
+  opacity: 1;
+  transition: opacity 0.3s ease-in 0.4s;
+}
+
+/* A media query that will adjust what I tell it too when the screen size is BELOW 600px  */
+@media (max-width: 600px) {
+  .container {
+    /* Changing the width to 100vw from the initial 90vw makes it so that on a smaller screen, the elements will take up more space to the left and right of the screen */
+    width: 100vw;
+  }
+  /* When the media query is active, or when the screen is below the specified amount, I will remove the last two panels(cards) so that only 3 will be showing as opposed to the original 5 */
+  .panel:nth-of-type(4),
+  /* Within the panel class, there are 5 elements, or 5 div tags. To select specific panels, we use the nth-type-of(n) which will select the nth child of the parent element(In this case the parent element is the panel class) */
+  .panel:nth-of-type(5) {
+    display: none;
+  }
+}
